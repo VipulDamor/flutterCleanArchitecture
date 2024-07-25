@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testflutterclean/presentation/blocks/news_list_block/article_bloc.dart';
-import 'package:testflutterclean/presentation/blocks/news_list_block/article_state.dart';
 
 import '../../../data/models/news_list/news_list.dart';
-import '../../blocks/news_list_block/article_event.dart';
+import '../../blocks/news_list_block/article_bloc.dart';
+import '../../blocks/news_list_block/article_state.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -15,39 +14,24 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreen extends State<DashboardScreen> {
   @override
-  void initState() {
-    super.initState();
-    ArticalBlock articalBlock =
-        BlocProvider.of<ArticalBlock>(context, listen: true);
-    articalBlock.add(FetchArticalEvent());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(builder: (context) {
-        return Material(
-            child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Dashboard"),
-          ),
-          body: Container(
-            child: BlocBuilder<ArticalBlock, ArticalStates>(
-              builder: (context, state) {
-                if (state is Loading) {
-                  return buildLoading();
-                } else if (state is Success) {
-                  return buildArticleList(state.news.articles!.toList());
-                } else if (state is Error) {
-                  return buildErrorUi(state.message);
-                } else {
-                  return Container();
-                }
-              },
-            ),
-          ),
-        ));
-      }),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Dashboard"),
+      ),
+      body: BlocBuilder<ArticalBloc, ArticalStates>(
+        builder: (context, state) {
+          if (state is Loading) {
+            return buildLoading();
+          } else if (state is Success) {
+            return buildArticleList(state.news.articles!.toList());
+          } else if (state is Error) {
+            return buildErrorUi(state.message);
+          } else {
+            return Container();
+          }
+        },
+      ),
     );
   }
 }

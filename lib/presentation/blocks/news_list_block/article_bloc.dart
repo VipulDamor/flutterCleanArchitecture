@@ -1,26 +1,26 @@
 import 'package:bloc/bloc.dart';
-import 'package:testflutterclean/presentation/blocks/news_list_block/article_event.dart';
-import 'package:testflutterclean/presentation/blocks/news_list_block/article_state.dart';
 
-import '../../../data/models/news_list/news_list.dart';
 import '../../../data/repository/news_repository.dart';
+import 'article_event.dart';
+import 'article_state.dart';
 
-class ArticalBlock extends Bloc<ArticalEvents, ArticalStates> {
+class ArticalBloc extends Bloc<ArticalEvent, ArticalStates> {
   NewsRepository newsRepository;
-  ArticalBlock(super.initialState, {required this.newsRepository});
+
+  ArticalBloc(super.initialState, {required this.newsRepository}) {
+    on<FetchArticalEvent>(_onFetchArticalEvent);
+  }
 
   ArticalStates get states => Loading();
 
-  @override
-  Stream<ArticalStates> mapEventToState(ArticalStates event) async* {
-    if (event is Success) {
-      yield Loading();
-      try {
-        News articles = await newsRepository.getNewsList();
-        yield Success(news: articles);
-      } catch (e) {
-        yield Error(message: e.toString());
-      }
+  void _onFetchArticalEvent(
+      FetchArticalEvent event, Emitter<ArticalStates> emit) async {
+    emit(Loading());
+    try {
+      final news = await newsRepository.getNewsList();
+      emit(Success(news: news));
+    } catch (error) {
+      emit(Error(message: error.toString()));
     }
   }
 }

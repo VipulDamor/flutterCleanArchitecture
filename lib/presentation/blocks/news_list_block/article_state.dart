@@ -2,25 +2,29 @@ import 'package:equatable/equatable.dart';
 
 import '../../../data/models/news_list/news_list.dart';
 
-abstract class ArticalStates extends Equatable {}
+abstract class ArticalStates extends Equatable {
+  const ArticalStates();
 
-class Loading extends ArticalStates {
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
+class Loading extends ArticalStates {}
+
 class Success extends ArticalStates {
-  News news;
-  Success({required this.news});
+  final News news;
+
+  const Success({required this.news});
 
   @override
-  List<Object?> get props => [news];
+  List<Object> get props => [news];
 }
 
 class Error extends ArticalStates {
-  String message;
-  Error({required this.message});
+  final String message;
+
+  const Error({required this.message});
 
   @override
-  List<Object?> get props => [message];
+  List<Object> get props => [message];
 }
