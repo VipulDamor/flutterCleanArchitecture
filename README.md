@@ -20,5 +20,5 @@ samples, guidance on mobile development, and a full API reference.
 
 <div align="center"> 
 <p><em>news list.</em></p>
-    <img src="app/img.png" alt="Screenshot 1" width="350"/>
+    <img src="screenshot/img.png" alt="Screenshot 1" width="350"/>
 </div>
