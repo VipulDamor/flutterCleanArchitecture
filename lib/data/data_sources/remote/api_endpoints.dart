@@ -1,5 +1,7 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiEndpoints {
-  static const _apikey = "4b16966571914b8ba8fe93ee149891b3";
-  static const newsList =
-      "top-headlines?sources=espn-cric-info&apiKey=$_apikey";
+  static final String _apiKey = dotenv.env['API_KEY'] ?? '';
+  static String newsList =
+      "top-headlines?sources=espn-cric-info&apiKey=$_apiKey";
 }
