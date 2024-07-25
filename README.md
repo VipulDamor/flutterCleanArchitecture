@@ -1,4 +1,4 @@
-# testflutterclean
+# Flutter Clean Architecture Demo app
 
 A new Flutter project.
 
