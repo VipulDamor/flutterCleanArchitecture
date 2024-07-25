@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testflutterclean/core/constants/colors.dart';
 import 'package:testflutterclean/core/constants/strings.dart';
+import 'package:testflutterclean/presentation/screens/news_detail/news_details.dart';
 
 import '../../../data/models/news_list/news_list.dart';
 import '../../blocks/news_list_block/article_bloc.dart';
@@ -18,7 +20,7 @@ class _DashboardScreen extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        backgroundColor: AppColor.white,
         title: const Text(AppStrings.news),
       ),
       body: BlocBuilder<ArticalBloc, ArticalStates>(
@@ -79,10 +81,16 @@ Widget buildArticleList(List<Articles> articles) {
             subtitle: Text(articles[pos].publishedAt.toString()),
           ),
           onTap: () {
-            //navigateToArticleDetailPage(context, articles[pos]);
+            navigateToArticleDetailPage(ctx, articles[pos]);
           },
         ),
       );
     },
+  );
+}
+
+void navigateToArticleDetailPage(context, Articles articl) {
+  Navigator.of(context).push(
+    MaterialPageRoute(builder: (context) => NewsDetails(artical: articl)),
   );
 }
