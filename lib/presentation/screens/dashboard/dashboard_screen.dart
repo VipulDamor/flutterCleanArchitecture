@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testflutterclean/core/constants/strings.dart';
 
 import '../../../data/models/news_list/news_list.dart';
 import '../../blocks/news_list_block/article_bloc.dart';
@@ -17,7 +18,8 @@ class _DashboardScreen extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard"),
+        elevation: 0,
+        title: const Text(AppStrings.news),
       ),
       body: BlocBuilder<ArticalBloc, ArticalStates>(
         builder: (context, state) {
@@ -62,7 +64,7 @@ Widget buildArticleList(List<Articles> articles) {
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
           child: ListTile(
-            leading: ClipOval(
+            leading: ClipRect(
               child: Hero(
                 tag: articles[pos].urlToImage.toString(),
                 child: Image.network(

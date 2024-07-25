@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../../../data/repository/news_repository.dart';
+import '../../../domain/repository/news_repository.dart';
 import 'article_event.dart';
 import 'article_state.dart';
 

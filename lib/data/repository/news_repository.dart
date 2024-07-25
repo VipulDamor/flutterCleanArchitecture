@@ -1,10 +1,7 @@
+import '../../domain/repository/news_repository.dart';
 import '../data_sources/remote/api_client.dart';
 import '../data_sources/remote/api_endpoints.dart';
 import '../models/news_list/news_list.dart';
-
-abstract class NewsRepository {
-  Future<News> getNewsList();
-}
 
 class NewsRepositoryImpl implements NewsRepository {
   var apiClient = ApiClient();
