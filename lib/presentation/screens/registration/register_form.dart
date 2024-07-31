@@ -8,8 +8,6 @@ class Registration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String username = "";
-    String password = "";
 
     return Scaffold(
       appBar: AppBar(
@@ -29,18 +27,20 @@ Widget registrationUI(BuildContext context) {
       padding: EdgeInsets.symmetric(horizontal: 16.sp),
       children: [
         BlocBuilder<RegistrationBloc, RegistrationState>(
-            buildWhen: (previous,current) => previous.username != current.username,
+            buildWhen: (previous, current) =>
+                previous.username != current.username,
             builder: (context, state) {
-          return TextField(
-            decoration: const InputDecoration(hintText: "Username"),
-            onChanged: (text) {
-              context.read<RegistrationBloc>().add(UsernameChange(text));
-            },
-          );
-        }),
+              return TextField(
+                decoration: const InputDecoration(hintText: "Username"),
+                onChanged: (text) {
+                  context.read<RegistrationBloc>().add(UsernameChange(text));
+                },
+              );
+            }),
         SizedBox(height: 16.sp),
         BlocBuilder<RegistrationBloc, RegistrationState>(
-          buildWhen: (previous,current)=>previous.password != current.password,
+          buildWhen: (previous, current) =>
+              previous.password != current.password,
           builder: (context, state) {
             return TextField(
               decoration: const InputDecoration(hintText: "Password"),
