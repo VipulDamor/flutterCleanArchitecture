@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testflutterclean/core/constants/colors.dart';
 import 'package:testflutterclean/core/constants/strings.dart';
 import 'package:testflutterclean/presentation/screens/news_detail/news_details.dart';
+import 'package:testflutterclean/presentation/screens/registration/register_form.dart';
 
 import '../../../data/models/news_list/news_list.dart';
 import '../../blocks/news_list_block/article_bloc.dart';
@@ -19,10 +22,6 @@ class _DashboardScreen extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColor.white,
-        title: const Text(AppStrings.news),
-      ),
       body: BlocBuilder<ArticalBloc, ArticalStates>(
         builder: (context, state) {
           if (state is Loading) {
@@ -35,6 +34,14 @@ class _DashboardScreen extends State<DashboardScreen> {
             return Container();
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const Registration()));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
