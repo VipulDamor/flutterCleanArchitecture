@@ -1,9 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testflutterclean/core/constants/colors.dart';
-import 'package:testflutterclean/core/constants/strings.dart';
 import 'package:testflutterclean/presentation/screens/news_detail/news_details.dart';
 import 'package:testflutterclean/presentation/screens/registration/register_form.dart';
 

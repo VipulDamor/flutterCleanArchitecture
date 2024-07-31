@@ -1,12 +1,16 @@
-import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:logging/logging.dart';
 
 part 'registration_event.dart';
+
 part 'registration_state.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
+  final log = Logger('RegistrationBloc');
+
   RegistrationBloc() : super(const RegistrationState()) {
     on<UsernameChange>((event, emit) {
       final isUsernameValid = event.username.isNotEmpty;
@@ -26,17 +30,17 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       ));
     });
 
-    on<SubmitRegistration>((event,emit){
-      if(state.isValidForm){
-        validate(state);
+    on<SubmitRegistration>((event, emit) {
+      emit(state.copyWith(
+          isValidForm: state.isValidUserName && state.isValidPassword));
+      if (state.isValidForm) {
+        _printCredentials(state.username, state.password);
       }
     });
-
   }
 
-  void validate(RegistrationState state) {
-    printToConsole("${state.username} ${state.password}");
+  void _printCredentials(String username, String password) {
+    log.info('Username: $username');
+    log.info('Password: $password');
   }
 }
-
-

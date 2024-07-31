@@ -29,6 +29,7 @@ Widget registrationUI(BuildContext context) {
       padding: EdgeInsets.symmetric(horizontal: 16.sp),
       children: [
         BlocBuilder<RegistrationBloc, RegistrationState>(
+            buildWhen: (previous,current) => previous.username != current.username,
             builder: (context, state) {
           return TextField(
             decoration: const InputDecoration(hintText: "Username"),
@@ -39,6 +40,7 @@ Widget registrationUI(BuildContext context) {
         }),
         SizedBox(height: 16.sp),
         BlocBuilder<RegistrationBloc, RegistrationState>(
+          buildWhen: (previous,current)=>previous.password != current.password,
           builder: (context, state) {
             return TextField(
               decoration: const InputDecoration(hintText: "Password"),
@@ -53,6 +55,7 @@ Widget registrationUI(BuildContext context) {
           builder: (context, state) {
             return ElevatedButton(
                 onPressed: () {
+                  FocusScope.of(context).unfocus();
                   context.read<RegistrationBloc>().add(SubmitRegistration());
                 },
                 child: const Text("Submit"));
